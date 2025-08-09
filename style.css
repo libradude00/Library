@@ -6,11 +6,11 @@ body {
 }
 
 .center-box {
-    max-width: 5000px;
-    margin: 1000px auto;
+    max-width: 500px;
+    margin: 100px auto;
     background: white;
-    padding: 200px;
-    border-radius: 100px;
+    padding: 20px;
+    border-radius: 10px;
     text-align: center;
     box-shadow: 0px 4px 10px rgba(0,0,0,0.1);
 }
