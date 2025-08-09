@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Book Library - Access</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="center-box">
+        <h1>Welcome to My Book Library</h1>
+        <p>Enter access code to continue:</p>
+        <input type="password" id="accessCode" placeholder="Access Code">
+        <button onclick="checkCode()">Enter</button>
+        <p id="error" class="error"></p>
+    </div>
+
+    <script>
+        function checkCode() {
+            const code = document.getElementById('accessCode').value;
+            const correctCode = "Hi-Friends"; // Change this to your code
+            if (code === correctCode) {
+                window.location.href = "main.html";
+            } else {
+                document.getElementById('error').textContent = "Incorrect code. Try again.";
+            }
+        }
+    </script>
+</body>
+</html>
