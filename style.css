@@ -8,7 +8,7 @@ body {
 .center-box {
     max-width: 500px;
     margin: 100px auto;
-    background: white;
+    background: White;
     padding: 20px;
     border-radius: 10px;
     text-align: center;
@@ -40,7 +40,7 @@ ul li {
 
 a {
     text-decoration: none;
-    color: #FFdF00;
+    color: #78081C;
 }
 
 a:hover {
@@ -48,5 +48,5 @@ a:hover {
 }
 
 .error {
-    color: red;
+    color: blue;
 }
