@@ -10,20 +10,55 @@
         <h1>Welcome to My Book Library</h1>
         <p>Enter access code to continue:</p>
         <input type="password" id="accessCode" placeholder="Access Code">
-        <button onclick="checkCode()">Enter</button>
+        <button id="enterBtn">Enter</button>
         <p id="error" class="error"></p>
     </div>
 
     <script>
+        // Fallback list (edit codes.json in the same folder to manage codes without changing this file)
+        let allowedCodesFallback = ["EHunnewell", "NRobinson", "JMeadows"];
+
+        // allowedCodes will be populated from codes.json if available, otherwise use fallback
+        let allowedCodes = allowedCodesFallback.slice();
+
+        async function loadCodes() {
+            try {
+                const resp = await fetch('codes.json', {cache: 'no-store'});
+                if (!resp.ok) throw new Error('No codes.json found');
+                const data = await resp.json();
+                if (Array.isArray(data.codes)) {
+                    allowedCodes = data.codes;
+                    console.log('Loaded codes.json,', allowedCodes.length, 'codes');
+                } else {
+                    console.warn('codes.json is not in expected format. Using fallback codes.');
+                }
+            } catch (e) {
+                console.log('Using fallback codes:', e.message);
+            }
+        }
+
         function checkCode() {
             const code = document.getElementById('accessCode').value;
-            const correctCode = "Hi-Friends"; // Change this to your code
-            if (code === correctCode) {
+            if (!code) {
+                document.getElementById('error').textContent = "Please enter a code.";
+                return;
+            }
+
+            // simple exact-match check; adjust to .toLowerCase() if you want case-insensitive matching
+            if (allowedCodes.includes(code)) {
                 window.location.href = "main.html";
             } else {
                 document.getElementById('error').textContent = "Incorrect code. Try again.";
             }
         }
+
+        document.getElementById('enterBtn').addEventListener('click', checkCode);
+        document.getElementById('accessCode').addEventListener('keyup', (e) => {
+            if (e.key === 'Enter') checkCode();
+        });
+
+        // load codes.json on startup (non-blocking)
+        loadCodes();
     </script>
 </body>
 </html>
