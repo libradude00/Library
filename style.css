@@ -1,0 +1,256 @@
+/* Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Playfair+Display:wght@700&display=swap');
+
+body {
+  font-family: 'Inter', sans-serif;
+  margin: 0;
+  background: #121212 url('brush.svg') no-repeat bottom right;
+  background-size: 200px;
+  color: #e6d752;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Header */
+header {
+  text-align: center;
+  padding: 2rem 1rem;
+  position: relative;
+  background: #1a1a1a;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.7);
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+  flex-shrink: 0;
+}
+header .logo {
+  width: 120px;
+  border-radius: 18px;
+  margin-bottom: 0.5rem;
+  border: 2px solid #e6d752;
+}
+header h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.5rem;
+  margin: 0.3rem 0;
+  color: #e6d752;
+  word-wrap: break-word;
+}
+header p {
+  font-style: italic;
+  color: #e6d752;
+  margin: 0.3rem 0 0;
+}
+
+
+/* Section Titles */
+.section-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 2rem;
+  text-align: center;
+  margin: 2rem 0 1rem;
+  color: #e6d752;
+  text-shadow: 2px 2px 6px rgba(0,0,0,0.7);
+  letter-spacing: 1px;
+  border-bottom: 2px solid #444;
+  display: inline-block;
+  padding-bottom: 0.3rem;
+}
+
+/* Grid layout */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 1.5rem;
+  padding: 2rem;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Book/Poem cards */
+.card {
+  display: block;
+  background: #1a1a1a;
+  border-radius: 16px;
+  overflow: hidden;
+  text-decoration: none;
+  color: #cdb587;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.7);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  position: relative;
+}
+.card:hover {
+  transform: translateY(-5px) rotate(-0.5deg) scale(1.03);
+  box-shadow: 0 12px 24px rgba(255, 215, 0, 0.5);
+}
+
+/* Cover image */
+.card-media {
+  position: relative;
+  aspect-ratio: 3 / 4;
+  overflow: hidden;
+  background: #222;
+}
+.card-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+.card:hover .card-media img {
+  transform: scale(1.03) rotate(-1deg);
+}
+
+/* Brush stroke accent */
+.card-brush {
+  position: absolute;
+  bottom: -8px;
+  right: -8px;
+  width: 80px;
+  height: 80px;
+  background: url('brush.svg') center/contain no-repeat;
+  opacity: 0.25;
+  transform: rotate(-15deg);
+  filter: hue-rotate(40deg); /* gives gold tint */
+}
+
+/* Card info */
+.card-body {
+  padding: 0.8rem 1rem 1rem;
+}
+.card-body h3 {
+  margin: 0.3rem 0 0.5rem;
+  font-family: 'Playfair Display', serif;
+  font-size: 1.2rem;
+  color: #cdb587;
+  word-wrap: break-word;
+}
+.card-body p {
+  margin: 0;
+  color: #E6C07B;
+  font-size: 0.9rem;
+  word-wrap: break-word;
+}
+
+/* Footer */
+.footer {
+  background-color: #222;
+  color: #eee;
+  padding: 30px 20px;
+  text-align: center;
+  font-family: 'Inter', sans-serif;
+  border-top: 2px solid #444;
+  flex-shrink: 0;
+}
+.footer-container h3 {
+  font-family: 'Playfair Display', serif;
+  font-weight: 700;
+  font-size: 1.8rem;
+  margin-bottom: 15px;
+  color: #66ccff;
+}
+.footer-container p {
+  margin: 5px 0;
+  font-size: 1rem;
+}
+.footer-container a {
+  color: #66ccff;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+.footer-container a:hover,
+.footer-container a:focus {
+  color: #99ddff;
+  text-decoration: underline;
+}
+.footer .library-note {
+  margin-top: 20px;
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  color: #aaa;
+  font-size: 0.9rem;
+}
+
+/* Responsive brush pattern */
+@media (max-width: 600px) {
+  body {
+    background-size: 120px;
+  }
+  .grid {
+    gap: 1rem;
+    padding: 1rem;
+  }
+}
+
+/* Additional responsive adjustments */
+
+/* Adjust grid columns and padding for tablets and smaller laptops */
+@media (max-width: 1024px) {
+  .grid {
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    padding: 1.5rem;
+    gap: 1.2rem;
+  }
+  header h1 {
+    font-size: 2rem;
+  }
+  .section-title {
+    font-size: 1.75rem;
+  }
+}
+
+/* For phone portrait mode: stack cards in a single column for easier vertical scroll */
+@media (max-width: 480px) {
+  .grid {
+    grid-template-columns: 1fr;
+    padding: 1rem;
+    gap: 1rem;
+  }
+  header h1 {
+    font-size: 1.5rem;
+    padding: 0 1rem;
+  }
+  header p {
+    font-size: 0.9rem;
+  }
+  .section-title {
+    font-size: 1.5rem;
+  }
+  .card-body h3 {
+    font-size: 1.1rem;
+  }
+  .card-body p {
+    font-size: 0.85rem;
+  }
+  .card-media {
+    aspect-ratio: 2 / 3; /* slightly taller for small screens */
+  }
+}
+
+/* Landscape phones and small tablets */
+@media (max-width: 767px) and (orientation: landscape) {
+  .grid {
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    padding: 1rem;
+    gap: 1rem;
+  }
+  header h1 {
+    font-size: 1.7rem;
+  }
+  .section-title {
+    font-size: 1.6rem;
+  }
+}
+
+/* Ensure modal scales nicely on smaller screens */
+@media (max-width: 600px) {
+  .modal-content {
+    width: 100%;
+    height: 100%;
+    border-radius: 0;
+  }
+  .close-btn {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.9rem;
+  }
+}
