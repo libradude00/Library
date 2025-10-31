@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Library</title>
+  <link rel="icon" type="image/png" href="logo.png">
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<header>
+  <img src="logo.png" class="logo" alt="Library Logo">
+  <h1>Adam's Library</h1>
+  <p>Written With Elegance And Esteem</p>
+</header>
+
+<!-- Books Section -->
+<section>
+  <h2 class="section-title">Books</h2>
+  <main class="grid" id="bookGrid"></main>
+</section>
+
+<!-- Poems Section -->
+<section>
+  <h2 class="section-title">Poems</h2>
+  <main class="grid" id="poemGrid"></main>
+</section>
+
+<!-- Modal -->
+<div id="readerModal" class="modal" role="dialog" aria-modal="true">
+  <div class="modal-content">
+    <button class="close-btn">Close &#x2716;</button>
+    <iframe id="readerFrame"></iframe>
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="footer-container">
+    <h3>Contact Me</h3>
+    <p>Email: <a href="mailto:amaciver09@gmail.com">amaciver09@gmail.com</a></p>
+    <p>Phone: <a href="tel:+19125722640">+1 (912) 572-2640</a></p>
+    <p class="library-note">Adam's Library since 2025</p>
+  </div>
+</footer>
+
+<script>
+  // Library items
+  const libraryItems = [
+    {title:"Techrot Saga", author:"AJM", cover:"books/trsc.png", file:"books/trs.pdf", type:"book"},
+    {title:"Academy For The Gifted", author:"AJM", cover:"books/aftg.png", file:"books/aftg.pdf", type:"book"},
+    {title:"In Progress", author:"AJM", cover:"books/cs.png", file:"books/book1.pdf", type:"book"},
+    {title:"Davinci's Brush", author:"AJM", cover:"books/dbc.png", file:"books/db.pdf", type:"poem"},
+    {title:"Poem For People Pleasers", author:"AJM", cover:"books/apc.png", file:"books/ap.pdf", type:"poem"},
+    {title:"The Art In My Voice", author:"AJM", cover:"books/TAIMVC.png", file:"books/TAIMV.pdf", type:"poem"},
+    {title:"Inheritance", author:"AJM", cover:"books/IHC.png", file:"books/ih.pdf", type:"poem"},
+    {title:"Chameleon", author:"AJM", cover:"books/CC.png", file:"books/C.pdf", type:"poem"},
+    {title:"The Quiet War", author:"AJM", cover:"books/TQWC.png", file:"books/TQW.pdf", type:"poem"},
+    {title:"Almost", author:"AJM", cover:"books/AC.png", file:"books/A.pdf", type:"poem"},
+    {title:"No Puppet Now", author:"AJM", cover:"Books/NPNC.png", file:"books/NPN.pdf", type:"poem"},
+    {title:"The Road Of Expectation", author:"AJM", cover:"Books/TROEC.png", file:"books/TROE.pdf", type:"poem"},
+  ]; 
+
+  // Build library cards
+  function buildLibrary(items) {
+    items.forEach((item, index) => {
+      const grid = document.getElementById(item.type + "Grid");
+      if (!grid) return;
+
+      const card = document.createElement("div");
+      card.className = "card";
+
+      // Random tilt
+      card.style.transform = `rotate(${(Math.random() * 8 - 4).toFixed(2)}deg)`;
+
+      // Automatic stagger (0.1s per card)
+      card.style.animationDelay = `${index * 0.1}s`;
+
+      card.innerHTML = `
+        <div class="card-media">
+          <img src="${item.cover}" alt="${item.title} cover">
+          <div class="card-brush"></div>
+        </div>
+        <div class="card-body">
+          <h3>${item.title}</h3>
+          <p>${item.author}</p>
+        </div>
+      `;
+      card.addEventListener("click", () => openModal(item.file));
+      grid.appendChild(card);
+    });
+  }
+
+  // Modal controls
+  const modal = document.getElementById("readerModal");
+  const frame = document.getElementById("readerFrame");
+  const closeBtn = document.querySelector(".close-btn");
+
+  function openModal(file) {
+    frame.src = file + "#zoom=125";
+    modal.style.display = "flex";
+  }
+
+  function closeModal() {
+    frame.src = "";
+    modal.style.display = "none";
+  }
+
+  // Event listeners
+  closeBtn.addEventListener("click", closeModal);
+  window.addEventListener("click", e => { if (e.target === modal) closeModal(); });
+  document.addEventListener("keydown", e => { if (e.key === "Escape") closeModal(); });
+
+  // Init
+  buildLibrary(libraryItems);
+</script>
+
+</body>
+</html>
